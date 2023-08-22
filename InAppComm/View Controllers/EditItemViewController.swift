@@ -8,6 +8,9 @@
 
 import UIKit
 
+protocol EditItemViewControllerDelegate {
+    func shouldAdd(item: String)
+}
 
 class EditItemViewController: UIViewController {
 
@@ -17,6 +20,7 @@ class EditItemViewController: UIViewController {
     
     // MARK: - Properties
     var editedItem: String?
+    var delegate: EditItemViewControllerDelegate!
     
     // MARK: - View Init Methods
     override func viewDidLoad() {
@@ -33,7 +37,6 @@ class EditItemViewController: UIViewController {
     }
     
     // MARK: - Custom Methods
-    
     fileprivate func setupUI() {
         textField.delegate = self
         
@@ -46,6 +49,15 @@ class EditItemViewController: UIViewController {
     
     // MARK: - IBAction Methods
     @IBAction func saveItem(_ sender: Any) {
+        guard let text = textField.text else { return }
+        
+        if text != "" {//we make sure that user has typed something on the textfield
+            if let delegate = delegate { //we make sure that the delegate property is not nil
+                delegate.shouldAdd(item: text) //Then, we call the shouldAdd(item:) function of the EditItemViewControllerDelegate protocol, providing text as the argument that represents the newly added item.
+            }
+            
+            navigationController?.popViewController(animated: true) //we dismiss the view controller by popping it from the navigation stack and we go back to our shopping list
+        }
         
     }
     @IBAction func deleteItem(_ sender: Any) {
@@ -54,10 +66,7 @@ class EditItemViewController: UIViewController {
     
 }
 
-
-
-
-// MARK: - UITextFieldDelegate
+    // MARK: - UITextFieldDelegate
 extension EditItemViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         saveItem(self)

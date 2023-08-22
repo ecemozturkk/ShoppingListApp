@@ -50,6 +50,8 @@ class ShoppingListViewController: UIViewController {
             if identifier == "idShowEditItemViewControllerSegue" {
                 if let editItemVC = segue.destination as? EditItemViewController {
                     
+                    editItemVC.delegate = self
+                    
                     if let index = selectedItemIndex {
                         editItemVC.editedItem = shoppingList.items[index]
                     }
@@ -116,3 +118,9 @@ extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource
     }
 }
 
+extension ShoppingListViewController: EditItemViewControllerDelegate {
+    func shouldAdd(item: String) {
+        shoppingList.items.append(item)
+        tableView.reloadData()
+    }
+}
