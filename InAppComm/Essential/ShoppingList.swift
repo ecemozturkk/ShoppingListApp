@@ -15,18 +15,14 @@ struct ShoppingList {
     var items = [String]()
 }
 
-
-
 struct ShoppingListsManager {
     var lists = [ShoppingList]()
     var currentID = 0
-    
     
     mutating func add(list: ShoppingList) {
         lists.append(list)
         sortLists()
     }
-    
     
     mutating func updateItems(inListWithID id: Int, items: [String]) {
         var index: Int?
@@ -46,7 +42,6 @@ struct ShoppingListsManager {
         }
     }
     
-    
     mutating func getNextListID() -> Int {
         currentID += 1
         return currentID
@@ -60,11 +55,9 @@ struct ShoppingListsManager {
         }
     }
     
-    
     func getItemsCount(atIndex index: Int) -> Int {
         return lists[index].items.count
     }
-    
     
     func getFormattedEditedTimestamp(listIndex: Int) -> String? {
         if let edited = lists[listIndex].editTimestamp {

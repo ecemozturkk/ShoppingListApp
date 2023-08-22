@@ -11,23 +11,14 @@ import UIKit
 class AllListsViewController: UIViewController {
 
     // MARK: - IBOutlet Properties
-    
     @IBOutlet weak var tableView: UITableView!
     
-    
-    
     // MARK: - Properties
-    
     var listManager = ShoppingListsManager()
-    
     var selectedListIndex: Int?
-    
     var renameListView: RenameListView?
     
-    
-    
     // MARK: - View Init Methods
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -35,17 +26,12 @@ class AllListsViewController: UIViewController {
         
     }
     
-
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         setupTableView()
         selectedListIndex = nil
     }
-    
-    
-    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -66,8 +52,6 @@ class AllListsViewController: UIViewController {
         }
     }
     
-
-    
     // MARK: - IBAction Methods
     
     @IBAction func createNewList(_ sender: Any) {
@@ -75,9 +59,6 @@ class AllListsViewController: UIViewController {
             performSegue(withIdentifier: "idEditShoppingListSegue", sender: self)
         }
     }
-    
-    
-    
     // MARK: - Custom Methods
     
     func setupTableView() {
@@ -90,8 +71,6 @@ class AllListsViewController: UIViewController {
         tableView.tableFooterView = UIView(frame: CGRect.zero)
         tableView.register(UINib(nibName: "ShoppingListCell", bundle: nil), forCellReuseIdentifier: "idShoppingListCell")
     }
-    
-    
     
     func showRenameListView() {
         if renameListView == nil {
@@ -111,22 +90,10 @@ class AllListsViewController: UIViewController {
                     self.renameListView?.textField.becomeFirstResponder()
                 }
             }
-            
-            
-            
             // Add action handlers here!
-            
-            
         }
     }
-    
-    
 }
-
-
-
-
-
 
 // MARK: - UITableViewDelegate, UITableViewDataSource
 extension AllListsViewController: UITableViewDelegate, UITableViewDataSource {
@@ -150,14 +117,10 @@ extension AllListsViewController: UITableViewDelegate, UITableViewDataSource {
             if let timestamp = listManager.getFormattedEditedTimestamp(listIndex: indexPath.row) {
                 cell.detailTextLabel?.text = "Edited on \(timestamp)"
             }
-            
             return cell
         }
-        
         return UITableViewCell()
     }
-    
-    
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.cellForRow(at: indexPath)?.isSelected = false
@@ -165,8 +128,6 @@ extension AllListsViewController: UITableViewDelegate, UITableViewDataSource {
         selectedListIndex = indexPath.row
         performSegue(withIdentifier: "idEditShoppingListSegue", sender: self)
     }
-    
-    
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action, view, handler) in
@@ -192,8 +153,6 @@ extension AllListsViewController: UITableViewDelegate, UITableViewDataSource {
         return config
         
     }
-    
-    
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 68.0

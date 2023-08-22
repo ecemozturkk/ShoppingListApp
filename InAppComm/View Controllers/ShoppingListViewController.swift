@@ -11,28 +11,18 @@ import UIKit
 class ShoppingListViewController: UIViewController {
 
     // MARK: - IBOutlet Properties
-    
     @IBOutlet weak var tableView: UITableView!
     
-    
     // MARK: - Properties
-    
     var shoppingList = ShoppingList()
-    
     var selectedItemIndex: Int?
     
-    
-    
-    
     // MARK: - View Init Methods
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
-    
-
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -45,8 +35,6 @@ class ShoppingListViewController: UIViewController {
         }
     }
     
-    
-    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
@@ -54,9 +42,6 @@ class ShoppingListViewController: UIViewController {
             updateParent()
         }
     }
-    
-    
-    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -73,9 +58,6 @@ class ShoppingListViewController: UIViewController {
             }
         }
     }
-    
-
-    
     // MARK: - Custom Methods
     
     func setupTableView() {
@@ -89,27 +71,15 @@ class ShoppingListViewController: UIViewController {
         tableView.register(UINib(nibName: "ShoppingListItemCell", bundle: nil), forCellReuseIdentifier: "idShoppingListItemCell")
     }
  
-    
-    
-    
     func updateParent() {
         
     }
-    
-    
-    
-    
     // MARK: - IBAction Methods
     
     @IBAction func addItem(_ sender: Any) {
         performSegue(withIdentifier: "idShowEditItemViewControllerSegue", sender: self)
     }
-    
-    
 }
-
-
-
 
 // MARK: - UITableViewDelegate, UITableViewDataSource
 extension ShoppingListViewController: UITableViewDelegate, UITableViewDataSource {

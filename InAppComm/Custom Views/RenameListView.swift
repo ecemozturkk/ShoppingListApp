@@ -11,7 +11,6 @@ import UIKit
 class RenameListView: UIView {
 
     // MARK: - IBOutlet Properties
-    
     @IBOutlet weak var textField: UITextField!
     
     
@@ -20,18 +19,14 @@ class RenameListView: UIView {
 
     
     // MARK: - Init
-    
     override init(frame: CGRect) {
         super.init(frame: CGRect.zero)
         loadContent()
     }
     
-    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    
-    
     
     // MARK: - Custom Methods
     
@@ -48,22 +43,15 @@ class RenameListView: UIView {
         }
     }
     
-    
-    
-    
-    
     // MARK: - IBAction Methods
     
 //    @IBAction func rename(_ sender: Any) {
 //        
 //    }
     
-    
     @IBAction func cancel(_ sender: Any) {
         
     }
-    
-    
     
 }
 
