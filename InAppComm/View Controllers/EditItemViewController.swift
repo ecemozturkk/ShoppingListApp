@@ -10,7 +10,9 @@ import UIKit
 
 protocol EditItemViewControllerDelegate {
     func shouldAdd(item: String)
-    func isItemPresent(item: String) -> Bool // true->item exists|false->item doesn’t exist 
+    func isItemPresent(item: String) -> Bool // true->item exists|false->item doesn’t exist
+    func shouldReplace(item: String, withItem newItem: String)
+    func shouldRemove(item: String)
 }
 
 class EditItemViewController: UIViewController {
@@ -55,7 +57,11 @@ class EditItemViewController: UIViewController {
         if text != "" {//we make sure that user has typed something on the textfield
             if let delegate = delegate { //we make sure that the delegate property is not nil
                 if !delegate.isItemPresent(item: text) { //Item doesn't exist in the items collection, so let's add it now
-                    delegate.shouldAdd(item: text) //we call the shouldAdd(item:) function of the EditItemViewControllerDelegate protocol, providing text as the argument that represents the newly added item.
+                    if let editedItem = editedItem {
+                        delegate.shouldReplace(item: editedItem, withItem: text)
+                    } else {
+                        delegate.shouldAdd(item: text)//we call the shouldAdd(item:) function of the EditItemViewControllerDelegate protocol, providing text as the argument that represents the newly added item.
+                    }
                     navigationController?.popViewController(animated: true) //we dismiss the view controller by popping it from the navigation stack and we go back to our shopping list
                 } else {
                     // Item exists already in the items collection.
@@ -65,13 +71,16 @@ class EditItemViewController: UIViewController {
                     present(alert, animated: true, completion: nil)
                 }
             }
-            
-
         }
-        
     }
+    
     @IBAction func deleteItem(_ sender: Any) {
+        guard let text = textField.text else { return }
         
+        if let delegate = delegate {
+            delegate.shouldRemove(item: text)
+            navigationController?.popViewController(animated: true)
+        }
     }
     
 }
