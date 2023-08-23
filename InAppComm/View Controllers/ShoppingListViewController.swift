@@ -123,4 +123,11 @@ extension ShoppingListViewController: EditItemViewControllerDelegate {
         shoppingList.items.append(item)
         tableView.reloadData()
     }
+    func isItemPresent(item: String) -> Bool {
+        if let _ = shoppingList.items.firstIndex(of: item) { //firstIndex(of: item) ifadesi, item dizesini bu koleksiyon içinde arar. Eğer bu öğe koleksiyon içinde bulunursa, o zaman bu öğenin ilk indeksini döndürür. Bulunmazsa nil değerini döndürür.
+            return true
+        } else {
+            return false
+        }
+    }
 }
