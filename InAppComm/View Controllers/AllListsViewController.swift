@@ -23,6 +23,8 @@ class AllListsViewController: UIViewController {
         super.viewDidLoad()
 
         NotificationCenter.default.addObserver(self, selector: #selector(handleDidCreateShoppingList(notification:)), name: .didCreateShoppingList, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleDidUpdateShoppingList(notification:)), name: .didUpdateShoppingList, object: nil)
+
 
     }
     @objc func handleDidCreateShoppingList(notification: Notification) {
@@ -36,6 +38,14 @@ class AllListsViewController: UIViewController {
             tableView.reloadData()
         }
     }
+    @objc func handleDidUpdateShoppingList(notification: Notification) {
+        if let userInfo = notification.userInfo {
+            if let id = userInfo["id"] as? Int, let items = userInfo["items"] as? [String] {
+                listManager.updateItems(inListWithID: id, items: items)
+                tableView.reloadData()
+            }
+        }
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -43,13 +53,14 @@ class AllListsViewController: UIViewController {
         setupTableView()
         selectedListIndex = nil
     }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-        
         if let identifier = segue.identifier {
             if identifier == "idEditShoppingListSegue" {
                 if let shoppingListVC = segue.destination as? ShoppingListViewController {
