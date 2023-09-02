@@ -112,7 +112,10 @@ class AllListsViewController: UIViewController {
                     self.renameListView?.textField.becomeFirstResponder()
                 }
             }
-            // Add action handlers here!
+            renameListView?.handleCancelRenaming {
+                self.renameListView?.removeFromSuperview()
+                self.renameListView = nil
+            }
         }
     }
 }

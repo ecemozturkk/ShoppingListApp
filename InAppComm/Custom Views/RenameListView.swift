@@ -9,6 +9,8 @@
 import UIKit
 
 class RenameListView: UIView {
+    
+    var cancelHandler: (() -> Void)?
 
     // MARK: - IBOutlet Properties
     @IBOutlet weak var textField: UITextField!
@@ -50,7 +52,13 @@ class RenameListView: UIView {
 //    }
     
     @IBAction func cancel(_ sender: Any) {
-        
+        if let handler = cancelHandler {
+                handler()
+            }
+    }
+    
+    func handleCancelRenaming(handler: @escaping () -> Void) {
+        cancelHandler = handler
     }
     
 }
