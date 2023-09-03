@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -40,7 +37,7 @@
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="j7V-Kl-7Jk"/>
                         <barButtonItem title="Rename" id="8OG-e0-Trw">
                             <connections>
-                                <action selector="rename:" destination="-1" id="7gh-5g-93F"/>
+                                <action selector="renameTodo:" destination="-1" id="7gh-5g-93F"/>
                             </connections>
                         </barButtonItem>
                     </items>
@@ -50,11 +47,11 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="zmi-rJ-0jK"/>
                     </constraints>
-                    <nil key="textColor"/>
                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="19"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="Vqh-qB-3xC" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="2xs-Dh-Hb8"/>
@@ -68,7 +65,6 @@
                 <constraint firstItem="Vqh-qB-3xC" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="vcS-S1-da2"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <point key="canvasLocation" x="132" y="154.27286356821591"/>
         </view>
     </objects>

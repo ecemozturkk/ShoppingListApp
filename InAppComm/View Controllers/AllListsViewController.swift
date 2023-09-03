@@ -116,6 +116,14 @@ class AllListsViewController: UIViewController {
                 self.renameListView?.removeFromSuperview()
                 self.renameListView = nil
             }
+            renameListView?.handleRenaming(handler: { (listName) in
+                if let index = self.selectedListIndex {
+                    self.listManager.lists[index].name = listName
+                    self.tableView.reloadData()
+                    self.renameListView?.removeFromSuperview()
+                    self.renameListView = nil
+                }
+            })
         }
     }
 }

@@ -11,6 +11,7 @@ import UIKit
 class RenameListView: UIView {
     
     var cancelHandler: (() -> Void)?
+    var renameHandler: ((_ name: String) -> Void)?
 
     // MARK: - IBOutlet Properties
     @IBOutlet weak var textField: UITextField!
@@ -47,9 +48,14 @@ class RenameListView: UIView {
     
     // MARK: - IBAction Methods
     
-//    @IBAction func rename(_ sender: Any) {
-//        
-//    }
+    @IBAction func renameTodo(_ sender: Any) {
+        guard let text = textField.text else { return }
+        if text != "" {
+            if let handler = renameHandler {
+                handler(text)
+            }
+        }
+    }
     
     @IBAction func cancel(_ sender: Any) {
         if let handler = cancelHandler {
@@ -61,5 +67,8 @@ class RenameListView: UIView {
         cancelHandler = handler
     }
     
+    func handleRenaming(handler: @escaping (_ name: String) -> Void) {
+        renameHandler = handler
+    }
 }
 
